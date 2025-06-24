@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.status-dot.ongoing {
+    background-color: #67C23A;  /* 绿色 */
+}
+
+.status-dot.completed {
+    background-color: #F56C6C;  /* 红色 */
+}
+
+.status-dot.delayed {
+    background-color: #E6A23C;  /* 黄色 */
+}
+
+.status-dot.paused {
+    background-color: #909399;  /* 灰色 */
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #304156;
+    color: white;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f0f2f5;
+}
+
+.header {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,21,41,.08);
+}
+
+.content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.el-menu {
+    border-right: none !important;
+}
+
+.operation-column {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.operation-column .el-button {
+    margin: 0 !important;
+    padding: 6px 12px;
+}
+
+.operation-column .el-button--default {
+    background-color: #ffffff;
+}
+
+.operation-column .el-button--danger {
+    margin-left: 0 !important;
+}
+
+.operation-column .el-button--success {
+    margin-left: 0 !important;
+}
+
+.el-table {
+    margin-top: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,21,41,.08);
+}
+
+.el-table th {
+    background-color: #f5f7fa !important;
+} 

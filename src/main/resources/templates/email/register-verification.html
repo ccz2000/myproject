@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邮箱验证</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        .content {
+            padding: 40px;
+        }
+        .welcome {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .verification-box {
+            background: #f8f9fa;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .verification-code {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            letter-spacing: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .verify-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+        .verify-button:hover {
+            transform: translateY(-2px);
+        }
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+            border-top: 1px solid #e9ecef;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .verification-code {
+                font-size: 28px;
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 欢迎加入部门管理系统</h1>
+            <p>请验证您的邮箱地址以完成注册</p>
+        </div>
+        
+        <div class="content">
+            <div class="welcome">
+                亲爱的用户，您好！
+            </div>
+            
+            <p>感谢您注册部门管理系统！为了确保您的账户安全，请使用以下验证码完成邮箱验证：</p>
+            
+            <div class="verification-box">
+                <p style="margin: 0; color: #666; font-size: 16px;">您的验证码</p>
+                <div class="verification-code" th:text="${verificationCode}">123456</div>
+                <p style="margin: 0; color: #666; font-size: 14px;">请在30分钟内使用此验证码</p>
+            </div>
+            
+            <div style="text-align: center;">
+                <a th:href="${verifyUrl}" class="verify-button">
+                    🔗 点击验证邮箱
+                </a>
+            </div>
+            
+            <div class="info-box">
+                <strong>📋 验证步骤：</strong>
+                <ol style="margin: 10px 0 0 20px;">
+                    <li>点击上方验证按钮或手动输入验证码</li>
+                    <li>验证成功后即可正常登录系统</li>
+                    <li>开始使用部门管理系统的所有功能</li>
+                </ol>
+            </div>
+            
+            <div class="warning-box">
+                <strong>⚠️ 安全提醒：</strong>
+                <ul style="margin: 10px 0 0 20px;">
+                    <li>验证码将在 <span th:text="${#temporals.format(expireTime, 'yyyy-MM-dd HH:mm:ss')}">2024-06-05 18:30:00</span> 过期</li>
+                    <li>请勿将验证码泄露给他人</li>
+                    <li>如果这不是您的操作，请忽略此邮件</li>
+                </ul>
+            </div>
+            
+            <p style="margin-top: 30px; color: #666;">
+                如果您无法点击验证按钮，请复制以下链接到浏览器中打开：<br>
+                <a th:href="${verifyUrl}" th:text="${verifyUrl}" style="color: #667eea; word-break: break-all;">验证链接</a>
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>此邮件由系统自动发送，请勿回复。</p>
+            <p>© 2025 部门管理系统 - 让管理更简单高效</p>
+        </div>
+    </div>
+</body>
+</html> 

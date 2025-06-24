@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能问答助手</title>
+    <link rel="stylesheet" href="css/ai-chat.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- 头部 -->
+        <div class="chat-header">
+            <div class="header-left">
+                <i class="fas fa-robot"></i>
+                <div class="header-info">
+                    <h1>智能问答助手</h1>
+                    <p id="status-text">连接中...</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-secondary" onclick="clearChat()">
+                    <i class="fas fa-trash"></i> 清空对话
+                </button>
+                <button class="btn-secondary" onclick="checkStatus()">
+                    <i class="fas fa-sync-alt"></i> 检查状态
+                </button>
+            </div>
+        </div>
+
+        <!-- 聊天区域 -->
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            你好！我是智能问答助手，可以为您回答各种问题。请随时向我提问！
+                        </div>
+                        <div class="message-time" id="welcomeTime"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 输入区域 -->
+        <div class="chat-input">
+            <div class="input-container">
+                <textarea 
+                    id="messageInput" 
+                    placeholder="在这里输入您的问题..." 
+                    rows="1"
+                    maxlength="2000"
+                ></textarea>
+                <button id="sendButton" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="input-footer">
+                <span class="char-count">0/2000</span>
+                <span class="tips">按 Enter 发送，Shift+Enter 换行</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载动画 -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-circle-notch fa-spin"></i>
+            <p>AI正在思考中...</p>
+        </div>
+    </div>
+
+    <!-- 状态提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="js/ai-chat.js"></script>
+</body>
+</html> 

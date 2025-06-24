@@ -1,0 +1,26 @@
+{
+  path: '/salary',
+  component: Layout,
+  name: 'Salary',
+  meta: { title: '薪资管理', icon: 'money' },
+  children: [
+    {
+      path: 'list',
+      name: 'SalaryList',
+      component: () => import('@/views/salary/SalaryList.vue'),
+      meta: { title: '薪资列表' }
+    },
+    {
+      path: 'adjustment',
+      name: 'SalaryAdjustment',
+      component: () => import('@/views/salary/SalaryAdjustment.vue'),
+      meta: { title: '薪资调整' }
+    },
+    {
+      path: 'payment',
+      name: 'SalaryPayment',
+      component: () => import('@/views/salary/SalaryPayment.vue'),
+      meta: { title: '薪资发放' }
+    }
+  ]
+} 

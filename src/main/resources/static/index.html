@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业管理系统</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.12/index.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- 先加载 Vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+    <!-- 加载 Element Plus -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-plus/2.3.12/index.full.js"></script>
+    <!-- 加载 Element Plus 图标 -->
+    <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+    <!-- 加载 Axios -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.4.0/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="app-container">
+            <!-- 侧边栏 -->
+            <div class="sidebar">
+                <el-menu
+                    :default-active="activeMenu"
+                    background-color="#304156"
+                    text-color="#bfcbd9"
+                    active-text-color="#409EFF"
+                    @select="handleSelect">
+                    <el-menu-item index="departments">
+                        <el-icon><folder /></el-icon>
+                        <span>部门管理</span>
+                    </el-menu-item>
+                    <el-menu-item index="employees">
+                        <el-icon><user /></el-icon>
+                        <span>员工管理</span>
+                    </el-menu-item>
+                    <el-menu-item index="projects">
+                        <el-icon><user /></el-icon>
+                        <span>项目管理</span>
+                    </el-menu-item>
+                </el-menu>
+            </div>
+
+            <!-- 主要内容区 -->
+            <div class="main-content">
+                <div class="header">
+                    <h2 style="margin: 0;">{{ pageTitle }}</h2>
+                </div>
+                <div class="content">
+                    <department-view v-if="activeMenu === 'departments'"></department-view>
+                    <employee-view v-if="activeMenu === 'employees'"></employee-view>
+                    <project-view v-if="activeMenu === 'projects'"></project-view>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils/filters.js"></script>
+    <script src="js/components/DepartmentView.js"></script>
+    <script src="js/components/EmployeeView.js"></script>
+    <script src="js/components/ProjectView.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html> 
